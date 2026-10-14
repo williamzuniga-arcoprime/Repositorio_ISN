@@ -1,0 +1,174 @@
+<title>Reportes Experiencia Clientes</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800;900&display=swap">
+<style>
+/* Layout: encabezado tinta con buscador; debajo, secciones por tema con listas de reportes en grilla. Tokens del Sistema Visual CX Arcoprime. */
+:root {
+  --brand-red: #e30613;
+  --on-brand: #ffffff;
+  --surface-page: #faf9f7;
+  --surface-card: #efefef;
+  --surface-ink: #141414;
+  --ink: #141414;
+  --ink-inverse: #f4f1ee;
+  --text-muted: #5c5856;
+  --text-accent: #e30613;
+  --hairline: #dad6d2;
+  --hover: #e6e4e1;
+  --font: "Outfit", "Goldplay", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --surface-page: #161514; --surface-card: #262423; --surface-ink: #0b0b0b;
+    --ink: #f4f1ee; --text-muted: #b3aeaa; --text-accent: #ff5a5f;
+    --hairline: #3a3735; --hover: #312e2c; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --surface-page: #161514; --surface-card: #262423; --surface-ink: #0b0b0b;
+  --ink: #f4f1ee; --text-muted: #b3aeaa; --text-accent: #ff5a5f;
+  --hairline: #3a3735; --hover: #312e2c; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--surface-page); color: var(--ink); font-family: var(--font); font-size: 16px; line-height: 1.45; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+
+header { background: var(--surface-ink); color: var(--ink-inverse); }
+header .wrap { padding-block: 48px 40px; display: grid; gap: 20px; }
+.kicker { font-size: 13px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #ff5a5f; }
+h1 { margin: 0; font-size: clamp(36px, 6vw, 64px); font-weight: 900; line-height: 1; letter-spacing: -1px; text-wrap: balance; text-transform: uppercase; }
+.lead { margin: 0; max-width: 60ch; font-size: 18px; color: #c9c4bf; }
+.tools { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 8px; }
+.search { flex: 1 1 280px; min-width: 0; font: inherit; font-size: 17px; padding: 12px 18px; border-radius: 999px; border: 1px solid #3a3735; background: #1f1e1d; color: var(--ink-inverse); }
+.search::placeholder { color: #8f8a86; }
+.search:focus-visible { outline: 2px solid #ff5a5f; outline-offset: 2px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font: inherit; font-size: 14px; font-weight: 500; padding: 8px 14px; border-radius: 999px; border: 1px solid #4f4b48; background: transparent; color: var(--ink-inverse); cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--brand-red); border-color: var(--brand-red); color: var(--on-brand); font-weight: 700; }
+.chip:focus-visible { outline: 2px solid #ff5a5f; outline-offset: 2px; }
+
+main .wrap { padding-block: 40px 64px; display: grid; gap: 48px; }
+section { display: grid; gap: 16px; }
+.sec-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; border-bottom: 1px solid var(--hairline); padding-bottom: 10px; }
+h2 { margin: 0; font-size: 24px; font-weight: 800; letter-spacing: -0.3px; }
+.sec-note { color: var(--text-muted); font-size: 15px; }
+.count { margin-left: auto; color: var(--text-muted); font-size: 14px; font-variant-numeric: tabular-nums; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
+a.card { display: grid; grid-template-rows: auto 1fr auto; gap: 6px; padding: 18px 20px; border-radius: 16px; background: var(--surface-card); color: var(--ink); text-decoration: none; min-width: 0; transition: background .15s; }
+a.card:hover { background: var(--hover); }
+a.card:focus-visible { outline: 2px solid var(--text-accent); outline-offset: 2px; }
+.card-title { font-size: 18px; font-weight: 700; line-height: 1.25; text-wrap: balance; }
+.card-desc { color: var(--text-muted); font-size: 15px; }
+.card-meta { display: flex; justify-content: space-between; gap: 8px; font-size: 13px; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+.card-meta .go { color: var(--text-accent); font-weight: 700; }
+.badge { font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text-accent); }
+.empty { color: var(--text-muted); font-size: 17px; padding: 24px 0; }
+footer .wrap { padding-block: 0 48px; color: var(--text-muted); font-size: 14px; }
+@media (prefers-reduced-motion: reduce) { a.card { transition: none; } }
+</style>
+
+<header>
+  <div class="wrap">
+    <div class="kicker">Arcoprime · Experiencia Clientes</div>
+    <h1>Reportes de experiencia</h1>
+    <p class="lead">Todos los reportes de CX en un solo lugar: comités, radares, ISN, voz del cliente y planes de acción.</p>
+    <div class="tools">
+      <input id="q" class="search" type="search" placeholder="Buscar reporte (ej. baños, ISN, steerco)" aria-label="Buscar reporte">
+      <div class="chips" id="chips" role="group" aria-label="Filtrar por tema"></div>
+    </div>
+  </div>
+</header>
+
+<main><div class="wrap" id="list"></div></main>
+<footer><div class="wrap" id="foot"></div></footer>
+
+<script>
+const GROUPS = [
+  { id: "comites", name: "Comités y Steerco", note: "Láminas para Gerencia y comités" },
+  { id: "radares", name: "Radares y monitoreo", note: "Seguimiento por tienda y negocio" },
+  { id: "isn", name: "ISN y embudo", note: "Del tráfico al indicador" },
+  { id: "voz", name: "Voz del cliente", note: "Feedback, historias y casos" },
+  { id: "accion", name: "Planes y gestión", note: "Qué se hace y quién se hace cargo" }
+];
+const U = "https://claude.ai/artifact/";
+const REPORTS = [
+  { g: "comites", t: "Steerco Experiencia Clientes · Octubre 2026", d: "Presentación del steerco de octubre.", id: "5J5o1VUjJUFbKNgguJHuQw", u: "2026-10-08" },
+  { g: "comites", t: "Steerco Experiencia Clientes · Octubre 2026 (versión alternativa)", d: "Segunda versión del mismo steerco.", id: "PZTPkuYR9niC5GmbPCfDib", u: "2026-10-08" },
+  { g: "comites", t: "Pérdida de experiencia OP · Comité de Operaciones", d: "Dónde se pierde experiencia en Operación Propia.", id: "PPB1stpED8gm1aetaNEZJ4", u: "2026-10-13" },
+  { g: "comites", t: "Experiencia Clientes en la Operación · Octubre 2026", d: "Estado de la experiencia en la operación.", id: "H9DKopAYERczTTaDs4Md32", u: "2026-10-08" },
+  { g: "comites", t: "Experiencia Septiembre vs Jun–Ago", d: "Comparación de septiembre contra el trimestre previo.", id: "JXRHStTeyktAd8ynTTR6xY", u: "2026-10-05" },
+  { g: "comites", t: "Diagnóstico de veranos CX", d: "Lo que pasó con la experiencia en temporadas de verano.", id: "MtXjqoKDzbN1NJappViHZA", u: "2026-10-05" },
+
+  { g: "radares", t: "Radar Operación Propia", d: "Monitoreo de experiencia en tiendas de Operación Propia.", id: "9cXbgN4DE2ybWuqw6ps4Pf", u: "2026-10-13" },
+  { g: "radares", t: "Radar de Imagen OP", d: "Estado de imagen en Operación Propia.", id: "Kp2kdvZAEgtXoVG5T3qaMT", u: "2026-10-06" },
+  { g: "radares", t: "Consolidado de gestión de imagen por negocio", d: "Imagen consolidada por línea de negocio.", id: "GkqPv8mCQNqCqhkUZwNCW4", u: "2026-09-30" },
+  { g: "radares", t: "Radar Baños Pronto", d: "Baños en tiendas Pronto.", id: "2kifMbMWNkmexRsXu43BQQ", u: "2026-09-30" },
+  { g: "radares", t: "Radar Baños Franquicia", d: "Baños en tiendas franquiciadas.", id: "HLg9nWss67ZiGMmF7e6RrG", u: "2026-09-30" },
+  { g: "radares", t: "Consola de Consistencia CX", d: "Consistencia de la experiencia entre tiendas.", id: "99JBba7jzxjJSoQVFhiwLm", u: "2026-09-14" },
+  { g: "radares", t: "Sala de Máquinas", d: "Vista operativa de los indicadores CX.", id: "JTLPqgqdHoM8EQB6GPLcyJ", u: "2026-08-31" },
+
+  { g: "isn", t: "ISN por tienda · Blue Express", d: "ISN en tiendas con Blue Express.", id: "4mhQFkGvcBnEffuTWDnLnx", u: "2026-09-22" },
+  { g: "isn", t: "Embudo CX por tienda", d: "Embudo de experiencia tienda por tienda.", id: "Bg3DCepq6ooLAczSJzLqio", u: "2026-09-17" },
+  { g: "isn", t: "Del tráfico al ISN", d: "Cómo el tráfico se convierte en respuestas e ISN.", id: "Thm897LUWkbY7gQLw9axJf", u: "2026-09-17" },
+  { g: "isn", t: "Del dolor al punto de ISN", d: "Qué dolores del cliente mueven el ISN.", id: "X24SrJ5cURrvT8igYQVeYr", u: "2026-08-26" },
+
+  { g: "voz", t: "Captura de feedback · Versión resumida · Octubre 2026", d: "Resumen de captura de feedback del cliente.", id: "NTMHBWCFnBXyGrz76KzkZL", u: "2026-10-14" },
+  { g: "voz", t: "Captura y métricas de feedback del cliente · Octubre 2026", d: "Versión completa con métricas de captura.", id: "DcbK7rs3qwGTqBh7mBwvtx", u: "2026-10-09" },
+  { g: "voz", t: "Historias WOW · Septiembre 2026", d: "Momentos destacados contados por clientes.", id: "Vuyh4YWW5pC52xTQP2PFV5", u: "2026-10-06" },
+  { g: "voz", t: "Buzón de William: casuísticas y dueños", d: "Casos recibidos y responsable de cada uno.", id: "CoxqokMRjVTzdnDhT5GwbQ", u: "2026-10-06" },
+
+  { g: "accion", t: "Planes de acción Operación Propia", d: "Consolidado por zona y tienda.", id: "KUhgYR1F27b2ThGnRMy4hG", u: "2026-10-06" },
+  { g: "accion", t: "Ficha de Contingencia OP", d: "Qué hacer ante contingencias en tienda.", id: "FyqjtTP1wpL5oi5yz8gzWu", u: "2026-10-09" },
+  { g: "accion", t: "Quick Wins de Hospitalidad", d: "Mejoras rápidas de hospitalidad en tienda.", id: "B8UHdaafTyc2WVHxBFC8vg", u: "2026-09-04" },
+  { g: "accion", t: "Equipo de Clientes: separación de responsabilidades", d: "Quién es dueño de qué en el equipo.", id: "EitnmqVWNpGRBaNJxErPs3", u: "2026-10-05" }
+];
+
+const MESES = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
+const fmt = s => { const [y, m, d] = s.split("-").map(Number); return `${d} ${MESES[m - 1]} ${y}`; };
+const norm = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+const newest = REPORTS.map(r => r.u).sort().at(-1);
+const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+let active = "todos";
+try { active = localStorage.getItem("cx-home-tema") || "todos"; } catch (e) {}
+if (active !== "todos" && !GROUPS.some(g => g.id === active)) active = "todos";
+
+const chips = document.getElementById("chips");
+const q = document.getElementById("q");
+const list = document.getElementById("list");
+
+function renderChips() {
+  const all = [{ id: "todos", name: "Todos" }, ...GROUPS];
+  chips.innerHTML = all.map(g => `<button class="chip" type="button" data-id="${g.id}" aria-pressed="${g.id === active}">${esc(g.name)}</button>`).join("");
+}
+chips.addEventListener("click", e => {
+  const b = e.target.closest(".chip"); if (!b) return;
+  active = b.dataset.id;
+  try { localStorage.setItem("cx-home-tema", active); } catch (e) {}
+  renderChips(); render();
+});
+q.addEventListener("input", render);
+
+function render() {
+  const term = norm(q.value.trim());
+  const html = GROUPS.filter(g => active === "todos" || g.id === active).map(g => {
+    const items = REPORTS.filter(r => r.g === g.id && (!term || norm(r.t + " " + r.d).includes(term)))
+      .sort((a, b) => b.u.localeCompare(a.u));
+    if (!items.length) return "";
+    return `<section>
+      <div class="sec-head"><h2>${esc(g.name)}</h2><span class="sec-note">${esc(g.note)}</span><span class="count">${items.length} ${items.length === 1 ? "reporte" : "reportes"}</span></div>
+      <div class="grid">${items.map(r => `
+        <a class="card" href="${U + r.id}" target="_blank" rel="noopener">
+          <span class="card-title">${esc(r.t)}</span>
+          <span class="card-desc">${esc(r.d)}</span>
+          <span class="card-meta"><span>${r.u === newest ? '<span class="badge">Nuevo · </span>' : ""}Actualizado ${fmt(r.u)}</span><span class="go">Abrir →</span></span>
+        </a>`).join("")}</div>
+    </section>`;
+  }).join("");
+  list.innerHTML = html || `<p class="empty">No hay reportes que coincidan con “${esc(q.value)}”. Prueba con otra palabra o elige “Todos”.</p>`;
+}
+
+document.getElementById("foot").textContent = `${REPORTS.length} reportes · última actualización ${fmt(newest)}`;
+renderChips(); render();
+</script>
